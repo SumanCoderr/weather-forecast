@@ -2,8 +2,31 @@ let input = document.querySelector("#input");
 let search = document.querySelector("#search");
 let container = document.querySelector(".container");
 let button_div = document.querySelector(".button-div");
+let weather_card = document.querySelector(".weather_card")
 let datalist = document.querySelector("datalist");
 let cities = [];
+
+
+
+const weatherCard = (temp, humidity, speed, dt_txt, icon,description) =>{
+  return `<section>
+          <div class="bg-gradient-to-r from-blue-500 to-slate-600 ">
+            <p class="text-center mt-2">${(dt_txt.split(" ")[0])}</p>
+            <div class="flex justify-between">
+              <div class="flex flex-col gap-y-6 justify-between py-10 px-4">
+                <p>Temperature: ${(temp - 273.15).toFixed(2)}&degC</p>
+                <p>Wind: ${speed}M/S</p>
+                <p>Humidity: ${humidity}%</p>
+              </div>
+
+              <div class="flex justify-between flex-col py-10 px-8">
+                <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="">
+                <p>${description}</p>
+              </div>
+            </div>
+          </div>
+        </section>`
+}
 
 search.addEventListener("click", () => getCoordinates());
 
@@ -40,31 +63,54 @@ function getweather(lat, lon) {
           return uniqueDaysData.push(forecastDate);
       });
 
-      console.log(fiveDaysWeather);
+      // console.log(fiveDaysWeather[0].main.temp)
+
+      weather_card.innerHTML = " "
+      fiveDaysWeather.forEach(weatherItem =>{
+        const {dt_txt} = weatherItem
+        const {icon,description} = weatherItem.weather[0]
+        const{temp, humidity, pressure} = weatherItem.main
+        const{speed} = weatherItem.wind
+        // console.log(temp, humidity, pressure,speed)
+        // console.log("hello")
+        // console.log(weatherItem)
+        weather_card.insertAdjacentHTML("beforeend", weatherCard(temp, humidity, speed, dt_txt, icon,description))
+        
+      })
+
+
+      // console.log(fiveDaysWeather);
+      console.log(value)
       //    const {temp, humidity} = value.main
       //    const {speed} = value.wind
       //    let city_name = input.value.trim()
       //    let date =new Date()
       //    console.log(`${city_name}\n ${date} \ntemperature: ${temp} \nhumidity: ${humidity} \nwind: ${speed}`)
-    });
+    })
+    // .catch(()=>{
+    //   alert("Opps! Something went wrong")
+    // })
 }
 
+
+
+
 function suggestion(city_name) {
-    console.log(datalist)
+    // console.log(datalist)
   if (!city_name == "" && !cities.includes(city_name)) {
     cities.push(city_name);
-    console.log(cities);
+    // console.log(cities);
   }
   sessionStorage.setItem("cities", JSON.stringify(cities));
   cities = JSON.parse(sessionStorage.getItem("cities"));
-  console.log(cities.length);
-  console.log(cities);
+  // console.log(cities.length);
+  // console.log(cities);
   datalist.innerHTML = ""
   for (i = 0; i < cities.length; i++) {
-    console.log("hello");
+    // console.log("hello");
     let option = document.createElement("option");
     option.innerHTML = cities[i];
     datalist.appendChild(option);
-    console.log(datalist)
+    // console.log(datalist)
   }
 }
