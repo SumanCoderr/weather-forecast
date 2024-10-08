@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Forecast</title>
     <link rel="icon" href="favicon.png" type="image/png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./src/output.css" />
   </head>
   <body class="bg-gradient-to-r from-blue-500 to-slate-100">
     <heading>
-      <h1 class="text-center font-bold text-5xl">Weather Forecasr</h1>
+      <h1 class="text-center font-bold text-5xl">Weather Forecast</h1>
     </heading>
 
     <section class="container items-center flex flex-col">
@@ -44,130 +48,13 @@
         </button>
       </div>
     </section>
-    <section class="flex text-amber-100">
-      <section >
-        <div class="bg-gradient-to-r align-middle from-blue-500 to-slate-600 w-80  m-16 mt-24 " >
-          <h2 class="text-center pt-3 font-bold text-xl">City Name</h2>
-          <p class="text-center mt-2">(Monday 7july 2024)</p>
-          <p class="text-center">Temperature: 23&degC</p>
-          <div class="flex justify-evenly">
-            <p>Temperature: 23&degC</p> 
-            <p>Temperature: 23&degC</p> 
-          </div>
-          <p class="text-center">logo</p>
-          <p class="text-center">light rain</p>
-          <div class="flex justify-evenly">
-          <p>Wind: 2.85M/S</p>
-          <p>Humidity: 76%</p>
-        </div>
-
-
-
-          <!-- <h2 class="text-center pt-3 font-bold text-xl">City Name</h2>
-          <p class="text-center mt-2">(Monday 7july 2024)</p>
-          <div class="flex justify-between">
-            <div class="flex flex-col gap-y-6 justify-between py-10 px-4">
-              <p>Temperature: 23&degC</p>
-              <p>Wind: 2.85M/S</p>
-              <p>Humidity: 76%</p>
-            </div>
-
-            <div class="flex justify-between flex-col py-10 px-8">
-              <p>logo</p>
-              <p>light rain</p>
-            </div> -->
-          </div>
-        </div>
+    <section class="flex text-amber-100 md:flex md:flex-col">
+      <section>
+        <div
+          class="current_weather_card bg-gradient-to-r from-blue-500 to-slate-600 ml-10 mt-12"
+        ></div>
       </section>
-      <section class="weather_card flex flex-wrap justify-evenly">
-        <!-- <section>
-          <div class="bg-gradient-to-r from-blue-500 to-slate-600 w-80">
-            <p class="text-center mt-2">(Monday 7july 2024)</p>
-            <div class="flex justify-between">
-              <div class="flex flex-col gap-y-6 justify-between py-10 px-4">
-                <p>Temperature: 23&degC</p>
-                <p>Wind: 2.85M/S</p>
-                <p>Humidity: 76%</p>
-              </div>
-
-              <div class="flex justify-between flex-col py-10 px-8">
-                <p>logo</p>
-                <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="">
-                <p>light rain</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div class="bg-gradient-to-r from-blue-500 to-slate-600 w-80">
-            <p class="text-center mt-2">(Monday 7july 2024)</p>
-            <div class="flex justify-between">
-              <div class="flex flex-col gap-y-6 justify-between py-10 px-4">
-                <p>Temperature: 23&degC</p>
-                <p>Wind: 2.85M/S</p>
-                <p>Humidity: 76%</p>
-              </div>
-
-              <div class="flex justify-between flex-col py-10 px-8">
-                <p>logo</p>
-                <p>light rain</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section>
-          <div class="bg-gradient-to-r from-blue-500 to-slate-600 w-80">
-            <p class="text-center mt-2">(Monday 7july 2024)</p>
-            <div class="flex justify-between">
-              <div class="flex flex-col gap-y-6 justify-between py-10 px-4">
-                <p>Temperature: 23&degC</p>
-                <p>Wind: 2.85M/S</p>
-                <p>Humidity: 76%</p>
-              </div>
-
-              <div class="flex justify-between flex-col py-10 px-8">
-                <p>logo</p>
-                <p>light rain</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section>
-          <div class="bg-gradient-to-r from-blue-500 to-slate-600 w-80">
-            <p class="text-center mt-2">(Monday 7july 2024)</p>
-            <div class="flex justify-between">
-              <div class="flex flex-col gap-y-6 justify-between py-10 px-4">
-                <p>Temperature: 23&degC</p>
-                <p>Wind: 2.85M/S</p>
-                <p>Humidity: 76%</p>
-              </div>
-
-              <div class="flex justify-between flex-col py-10 px-8">
-                <p>logo</p>
-                <p>light rain</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section>
-          <div class="bg-gradient-to-r from-blue-500 to-slate-600 w-80">
-            <p class="text-center mt-2">(Monday 7july 2024)</p>
-            <div class="flex justify-between">
-              <div class="flex flex-col gap-y-6 justify-between py-10 px-4">
-                <p>Temperature: 23&degC</p>
-                <p>Wind: 2.85M/S</p>
-                <p>Humidity: 76%</p>
-              </div>
-
-              <div class="flex justify-between flex-col py-10 px-8">
-                <p>logo</p>
-                <p>light rain</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </section> -->
+      <section class="weather_card flex flex-wrap justify-evenly"></section>
     </section>
 
     <script src="script.js"></script>
