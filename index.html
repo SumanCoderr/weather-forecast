@@ -11,10 +11,12 @@
     />
     <link rel="stylesheet" href="./src/output.css" />
   </head>
-  <body class="bg-gradient-to-r from-blue-500 to-slate-100">
-    <heading>
-      <h1 class="text-center font-bold text-5xl">Weather Forecast</h1>
-    </heading>
+  <body class="bg-gradient-to-r from-blue-500 to-amber-400 md:w-full">
+    <header>
+      <h1 class="font-bold text-3xl text-center mt-4 md:text-5xl lg:mt-0">
+        Weather Forecast
+      </h1>
+    </header>
 
     <section class="container items-center flex flex-col">
       <label for="input" class="mt-3 mb-1 text-2xl text-red-950"
@@ -31,7 +33,7 @@
 
       <datalist id="city"></datalist>
 
-      <div class="button-div text-center flex">
+      <div class="button-div text-center flex mx-4 mt-2">
         <button
           id="search"
           class="bg-sky-500 px-4 mt-3 text-xl rounded-xl py-1 hover:bg-sky-600 hover:shadow-lg hover: shadow-sky-600/50"
@@ -42,21 +44,26 @@
         <p class="mt-3 mx-3 text-lg font-bold">or</p>
 
         <button
-          class="mt-3 bg-sky-500 px-4 text-xl rounded-xl py-1 hover:bg-sky-600 hover:shadow-lg hover: shadow-sky-600/50"
+          class="location mt-3 bg-sky-500 px-4 text-xl rounded-xl py-1 hover:bg-sky-600 hover:shadow-lg hover: shadow-sky-600/50"
         >
           Use Current Location
         </button>
       </div>
     </section>
-    <section class="flex text-amber-100 md:flex md:flex-col">
+
+    <section class="flex flex-col lg:flex-row text-amber-100">
       <section>
         <div
-          class="current_weather_card bg-gradient-to-r from-blue-500 to-slate-600 ml-10 mt-12"
+          class="current_weather_card shadow-2xl shadow-black mx-4 mt-12 text-black lg:mr-0"
         ></div>
       </section>
-      <section class="weather_card flex flex-wrap justify-evenly"></section>
+      <section
+        class="weather_card flex flex-wrap justify-evenly mx-5 my-10 lg:my-0 lg:mb-0"
+      >
+    </section>
     </section>
 
     <script src="script.js"></script>
   </body>
 </html>
+
