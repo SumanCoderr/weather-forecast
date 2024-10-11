@@ -23,30 +23,28 @@ const weatherCard = (
   temp_min,
 ) => {
   // current day weather forecast
-  
-
   if (index === 0) {
     return ` <div class = "hover:cursor-pointer duration-700 hover:scale-110">
-    <h2 class="text-center pt-4 font-bold text-xl uppercase">${city_name}</h2>
-    <p class="text-center mt-2 md:font-medium">(${dt_txt.split(" ")[0]})</p>
-    <p class="py-4 text-center px-10 md:font-medium">Temperature: ${(
+    <h2 class="text-center pt-4 font-bold text-xl uppercase md:text-xl">${city_name}</h2>
+    <p class="text-center mt-2 md:font-medium md:text-lg">(${dt_txt.split(" ")[0]})</p>
+    <p class=" text-center mt-2 font-medium md:text-xl">Temperature: ${(
       temp - 273.15
     ).toFixed(2)}&degC</p>
     <div class="flex justify-evenly">
-    <p class = "px-12 py-2 text-center md:font-medium">Max_Temp: ${(
+    <p class = "px-12 py-2 text-center font-medium">Max_Temp: ${(
       temp_max - 273.15
     ).toFixed(2)}&degC</p>
-    <p class = "px-12 py-2 text-center md:font-medium">Min_Temp: ${(
+    <p class = "px-12 py-2 text-center font-medium">Min_Temp: ${(
       temp_min - 273.15
     ).toFixed(2)}&degC</p> 
     </div>
-    <div class="flex justify-center">
+    <div class="flex justify-center text-lg">
     <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="weather_condition">
     </div>
-    <p class="text-center font-bold uppercase ">${description}</p>
-    <div class="flex justify-evenly py-5">
-    <p class = "md:font-medium" >Wind: ${speed}M/S</p>
-    <p class = "md:font-medium" >Humidity: ${humidity}%</p>
+    <p class="text-center font-bold uppercase md:text-xl ">${description}</p>
+    <div class="flex justify-evenly py-5 md:text-xl">
+    <p class = "font-medium md:text-xl">Wind: ${speed}M/S</p>
+    <p class = "font-medium md:text-xl">Humidity: ${humidity}%</p>
     </div>
     </div>`;
   }
@@ -55,7 +53,7 @@ const weatherCard = (
   else {
     return `<section>
     <div class="bg-slate-500"> 
-    <p class="text-center mt-2 pt-4">${dt_txt.split(" ")[0]}</p>
+    <p class="text-center mt-2 pt-4 ">${dt_txt.split(" ")[0]}</p>
     <div class="flex justify-between">
     <div class="flex flex-col gap-y-6 justify-between py-8 px-4">
     <p>Temperature: ${(temp - 273.15).toFixed(2)}&degC</p>
@@ -63,9 +61,9 @@ const weatherCard = (
     <p>Humidity: ${humidity}%</p>
     </div>
     
-    <div class="flex justify-between flex-col py-10 px-8">
+    <div class="flex justify-evenly flex-col px-8 ">
     <div class = "w-25">
-    <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="">
+    <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="weather condition">
     </div>
     <p class = "text-center">${description}</p>
     </div>
@@ -81,8 +79,9 @@ search.addEventListener("click", getCoordinates);
 function getCoordinates() {
   let city_name = input.value.trim(); //removes extra spaces from starting and end
 
-  suggestion(city_name); //dropdown in inpubox
-  if (city_name === "") {
+  suggestion(city_name); //dropdown in inputbox
+
+  if (city_name === "") {   // validation : if the input field is empty 
     alert("please fill the field");
     return;
   }
@@ -94,7 +93,17 @@ function getCoordinates() {
       const { lat, lon } = res[0];
       getweather(lat, lon, city_name);
     })
-    .catch(() => alert("something went wrong"));
+    .catch((error) =>{ 
+      if(error.message === "Failed to fetch"){  //internet problem
+        alert("No Internet")
+      }
+      else if(error.message === "Cannot destructure property 'lat' of 'res[0]' as it is undefined.")  //invalid location
+      alert("Please enter valid location")  
+
+      else{
+        alert("Something went wrong")
+      }
+      });
   input.value = ""; //empty input box after clicking on search button
 }
 
@@ -162,12 +171,11 @@ function getweather(lat, lon, city_name) {
       });
     })
     .catch((error) => {
-      console.log(error);
       alert("Opps! Something went wrong"); //handle error
     });
 }
 
-// change background of current-day according to the weather
+// change background of current-day according to the current weather
 const change_Bg_Color = (weatherItem) => {
   switch (weatherItem.weather[0].main) {
     case "Clear":
@@ -179,6 +187,8 @@ const change_Bg_Color = (weatherItem) => {
       current_weather_card.style.background =
         "url('https://images.pexels.com/photos/531756/pexels-photo-531756.jpeg?cs=srgb&dl=pexels-pixabay-531756.jpg&fm=jpg')";
       current_weather_card.style.backgroundSize = "cover";
+      current_weather_card.style.color = "black";
+
       break;
     case "Rain":
       current_weather_card.style.color = "white";
@@ -188,7 +198,6 @@ const change_Bg_Color = (weatherItem) => {
       break;
     case "Thunderstorm":
       current_weather_card.style.color = "white";
-
       current_weather_card.style.background =
         "url('https://c02.purpledshub.com/uploads/sites/41/2020/08/GettyImages-NA006117-b5eac24.jpg')";
       current_weather_card.style.backgroundSize = "cover";
@@ -200,14 +209,12 @@ const change_Bg_Color = (weatherItem) => {
       break;
     case "Drizzle":
       current_weather_card.style.color = "white";
-
       current_weather_card.style.background =
         "url('https://www.shutterstock.com/image-photo/tamarind-leaves-sunshine-drizzle-rain-600nw-1721781844.jpg')";
       current_weather_card.style.backgroundSize = "cover";
       break;
     default:
       current_weather_card.style.color = "white";
-
       current_weather_card.style.background =
         "url('https://images.pexels.com/photos/209831/pexels-photo-209831.jpeg?cs=srgb&dl=pexels-pixabay-209831.jpg&fm=jpg')";
       current_weather_card.style.backgroundSize = "cover";
@@ -219,7 +226,7 @@ const userCoordinates = () => {
   navigator.geolocation.getCurrentPosition(
     (position) => {
       const { latitude, longitude } = position.coords;
-      const reverse_geocoding_url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=13a61ecb183b433bfa1c21e2cf1c7448`;
+      const reverse_geocoding_url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=13a61ecb183b433bfa1c21e2cf1c7448`;
       fetch(reverse_geocoding_url)
         .then((res) => res.json())
         .then((res) => {
